@@ -1,0 +1,96 @@
+/* -------------------------------Header styling ------------------*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  header a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  
+  header a:hover {
+    text-decoration: underline;
+  }
+  
+  .logo {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    display: flex;
+  }
+  
+  .nav-links a {
+    margin: 0 15px;
+  }
+  
+/* -------------General styling for the body -----------*/
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Styling for headings */
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table headers */
+thead th {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #000000;
+  font-size: 14px;
+}
+
+/* Table rows */
+tbody td {
+  padding: 10px;
+  border: 1px solid #000000;
+  text-align: left;
+}
+
+/* Highlight student ID column */
+tbody td:first-child {
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+
+/* Zebra striping for rows */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect for rows */
+tbody tr:hover {
+  background-color: #e6e6e6;
+}
+
+/* Center align small messages */
+.message {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}

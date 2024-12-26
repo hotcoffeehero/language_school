@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title><%= title %></title>
+</head>
+<body>
+  <!------------------------------------------------HEADER-->
+  <%- include('_header') %>
+  <!--------------------------------------------------HEADER-->
+
+  <h1>Instructors</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Hire Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% instructors.forEach(instructor => { %>
+        <tr>
+          <td><%= instructor.id %></td>
+          <td><%= instructor.name %></td>
+          <td><%= instructor.email %></td>
+          <td><%= new Date(instructor.hire_date).toLocaleDateString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

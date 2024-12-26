@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Student Profile</title>
+</head>
+<body>
+  <!------------------------------------------------HEADER-->
+  <%- include('_header') %>
+  <!--------------------------------------------------HEADER-->
+  <h1>Student Profile</h1>
+  <form action="/students/<%= student.id %>" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<%= student.name %>">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="<%= student.email %>">
+    <label for="enrollment_date">Enrollment Date:</label>
+    <input type="date" id="enrollment_date" name="enrollment_date" value="<%= student.enrollment_date ? new Date(student.enrollment_date).toISOString().split('T')[0] : '' %>">
+    <button type="submit">Save Changes</button>
+  </form>
+  <form action="/students/<%= student.id %>/delete" method="POST">
+    <button type="submit">Delete Profile</button>
+  </form>
+</body>
+</html>
