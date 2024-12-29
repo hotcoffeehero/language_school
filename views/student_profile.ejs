@@ -11,17 +11,36 @@
   <%- include('_header') %>
   <!--------------------------------------------------HEADER-->
   <h1>Student Profile</h1>
-  <form action="/students/<%= student.id %>" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" value="<%= student.name %>">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="<%= student.email %>">
-    <label for="enrollment_date">Enrollment Date:</label>
-    <input type="date" id="enrollment_date" name="enrollment_date" value="<%= student.enrollment_date ? new Date(student.enrollment_date).toISOString().split('T')[0] : '' %>">
-    <button type="submit">Save Changes</button>
-  </form>
-  <form action="/students/<%= student.id %>/delete" method="POST">
-    <button type="submit">Delete Profile</button>
-  </form>
+  <div class="container">
+    <div class="box">
+      <div class="photo">
+        <img src="/images/student_1.png" alt="Profile Photo">
+      </div>
+      <div class="name">
+        <strong>Name: </strong><%= student.name %>
+      </div>
+      <div class="level">
+        <strong>Level: </strong><%= student.level %>
+      </div>
+      <div class="email">
+        <strong>Email: </strong><%= student.email %>
+      </div>
+      <div class="occupation">
+        <strong>Occupation: </strong><%= student.occupation %>
+      </div>
+      <div class="phone">
+        <strong>Phone: </strong><%= student.phone_number %>
+      </div>
+      <div class="address">
+        <strong>Address:</strong>
+        <div class="address-line1"><%= student.address_line1 %></div>
+        <div class="address-line2"><%= student.address_line2 %></div>
+        <div class="address-zip"><%= student.address_zip %></div>
+      </div>
+      <div class="edit-profile">
+        <button type="button" onclick="toggleEdit()">Edit Profile</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
