@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style_folder/header.css">
+  <link rel="stylesheet" href="/style_folder/add_student.css">
+  <title><%= title %></title>
+</head>
+<body>
+  <!------------------------------------------------HEADER-->
+  <%- include('_header') %>
+  <!--------------------------------------------------HEADER-->
+  <h1>Add Student</h1>
+  <div class="container">
+    <div class="box">
+      <form action="/students/add" method="POST" enctype="multipart/form-data">
+
+        <div class="name">
+          <label for="name"><strong>Name: </strong></label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="level">
+          <label for="level"><strong>Level: </strong></label>
+          <input type="text" id="level" name="level">
+        </div>
+
+        <div class="email">
+          <label for="email"><strong>Email: </strong></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="occupation">
+          <label for="occupation"><strong>Occupation: </strong></label>
+          <input type="text" id="occupation" name="occupation">
+        </div>
+
+        <div class="phone">
+          <label for="phone_number"><strong>Phone: </strong></label>
+          <input type="text" id="phone_number" name="phone_number">
+        </div>
+
+        <div class="address">
+          <label for="address_line1"><strong>Address Line 1: </strong></label>
+          <input type="text" id="address_line1" name="address_line1">
+          <label for="address_line2"><strong>Address Line 2: </strong></label>
+          <input type="text" id="address_line2" name="address_line2">
+          <label for="postal_code"><strong>Postal Code: </strong></label>
+          <input type="text" id="postal_code" name="postal_code">
+        </div>
+
+        <div class="photo-upload">
+          <label for="photo"><strong>Upload Photo: </strong></label>
+          <input type="file" id="photo" name="photo">
+        </div>
+
+        <div class="add-student">
+          <button type="submit">Add Student</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</body>
+</html>

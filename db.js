@@ -1,40 +1,101 @@
 const mysql = require('mysql2');
 
-// Create a connection pool
 const pool = mysql.createPool({
-  host: '127.0.0.1', // Replace with your DB host if not local
-  user: 'root', // Replace with your MySQL username
-  password: 'Mysql5000!', // Replace with your MySQL password
-  database: 'language_school', // Replace with your DB name
-  port: 3306,
-  waitForConnections: true,
-  connectionLimit: 10, // Maximum number of concurrent connections
-  queueLimit: 0
+  connectionLimit: 10,
+  host: '127.0.0.1',
+  user: 'root',
+  password: 'Mysql5000!',
+  database: 'language_school'
 });
 
-// Export the connection pool
-const promisePool = pool.promise();
+function generateUniqueId() {
+  return new Promise((resolve, reject) => {
+    const id = Math.floor(1000000 + Math.random() * 9000000); // Generate a random 7-digit number
+    pool.query('SELECT id FROM students WHERE id = ?', [id], (error, results) => {
+      if (error) {
+        return reject(error);
+      }
+      if (results.length > 0) {
+        // ID already exists, generate a new one
+        return resolve(generateUniqueId());
+      }
+      resolve(id);
+    });
+  });
+}
 
 module.exports = {
-  getStudents: async () => {
-    const [rows] = await promisePool.query('SELECT * FROM students');
-    return rows;
+  getStudents: () => {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT id, name, phone_number, level FROM students', (error, results) => { // Use phone_number instead of phone
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
+    });
   },
-
-  getStudentById: async (id) => {
-    const [rows] = await promisePool.query('SELECT * FROM students WHERE id = ?', [id]);
-    return rows[0];
+  getStudentById: (id) => {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM students WHERE id = ?', [id], (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results[0]);
+      });
+    });
   },
-
-  updateStudentById: async (id, data) => {
-    const { name, email, enrollment_date } = data;
-    await promisePool.query(
-      'UPDATE students SET name = ?, email = ?, enrollment_date = ? WHERE id = ?',
-      [name, email, enrollment_date, id]
-    );
+  addStudent: (student) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = await generateUniqueId();
+        const query = `
+          INSERT INTO students (id, name, email, level, occupation, phone_number, address_line1, address_line2, postal_code, photo_url)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+        const values = [
+          id, student.name, student.email, student.level, student.occupation, student.phone_number,
+          student.address_line1, student.address_line2, student.postal_code, student.photo_url
+        ];
+        pool.query(query, values, (error, results) => {
+          if (error) {
+            return reject(error);
+          }
+          resolve(results);
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
   },
-
-  deleteStudentById: async (id) => {
-    await promisePool.query('DELETE FROM students WHERE id = ?', [id]);
+  updateStudent: (id, student) => {
+    return new Promise((resolve, reject) => {
+      const query = `
+        UPDATE students
+        SET name = ?, level = ?, email = ?, occupation = ?, phone_number = ?,
+            address_line1 = ?, address_line2 = ?, postal_code = ?, photo_url = ?
+        WHERE id = ?
+      `;
+      const values = [
+        student.name, student.level, student.email, student.occupation, student.phone_number,
+        student.address_line1, student.address_line2, student.postal_code, student.photo_url, id
+      ];
+      pool.query(query, values, (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
+    });
+  },
+  deleteStudent: (id) => {
+    return new Promise((resolve, reject) => {
+      pool.query('DELETE FROM students WHERE id = ?', [id], (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
+    });
   }
 };

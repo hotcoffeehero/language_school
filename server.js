@@ -1,49 +1,34 @@
 const express = require('express');
 const path = require('path');
+const multer = require('multer');
 const studentsRouter = require('./routes/students');
-const db = require('./db'); // Import the database connection
 
-const app = express(); // Initialize the Express application
-
-// Set the port to listen on
-const PORT = process.env.PORT || 3000;
-
-// Set EJS as the template engine
-app.set('view engine', 'ejs');
-
-// Set the views directory
-app.set('views', path.join(__dirname, 'views'));
-
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+const app = express();
 
 // Middleware to parse incoming requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Use the students router
-app.use('/students', studentsRouter);
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Route to render the instructors page
-app.get('/instructors', async (req, res) => {
-  try {
-    const rows = await db.getInstructors(); // Assuming you have a function to get instructors
-    res.render('instructors', { title: 'Instructors', instructors: rows });
-  } catch (error) {
-    console.error('Error retrieving instructor data:', error);
-    res.status(500).send('Error retrieving instructor data');
+// Set the view engine to EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Configure Multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
   }
 });
+const upload = multer({ storage });
 
-// Route to render the schedules page
-app.get('/schedules', (req, res) => {
-  res.render('schedules', { title: 'Schedules' });
-});
-
-// Route to render the settlement page
-app.get('/settlement', (req, res) => {
-  res.render('settlement', { title: 'Settlement' });
-});
+// Use the students router
+app.use('/students', studentsRouter(upload));
 
 // Route to render the homepage => index.ejs.
 app.get('/', (req, res) => {
@@ -51,6 +36,7 @@ app.get('/', (req, res) => {
 });
 
 // Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

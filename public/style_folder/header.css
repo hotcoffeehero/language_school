@@ -1,0 +1,38 @@
+/* Color Palette */
+:root {
+  --primary: #4a4a4a; /* Dark Gray */
+  --secondary: #b0b0b0; /* Light Gray */
+  --accent: #d9d9d9; /* Very Light Gray */
+  --hover: #a8d5ba; /* Gentle Green */
+}
+
+/* Header styling */
+header {
+  background-color: var(--primary); /* Dark Gray */
+  color: var(--accent); /* Very Light Gray */
+  padding: 20px;
+  text-align: center;
+}
+
+header .logo a {
+  color: var(--accent); /* Very Light Gray */
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+header .nav-links {
+  margin-top: 10px;
+}
+
+header .nav-links a {
+  color: var(--accent); /* Very Light Gray */
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1rem;
+}
+
+header .nav-links a:hover {
+  color: var(--hover); /* Gentle Green */
+  text-decoration: underline;
+}

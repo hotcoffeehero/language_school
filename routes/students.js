@@ -2,52 +2,114 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db'); // Assuming you have a database module
 
-// Route to get all students
-router.get('/', async (req, res) => {
-  try {
-    const students = await db.getStudents(); // Fetch students from the database
-    res.render('students', { title: 'Students', students });
-  } catch (error) {
-    console.error('Error retrieving student data:', error);
-    res.status(500).send('Error retrieving student data');
-  }
-});
+module.exports = (upload) => {
+  // Route to get all students
+  router.get('/', async (req, res) => {
+    try {
+      const students = await db.getStudents(); // Fetch all students from the database
+      res.render('students', { title: 'Students', students });
+    } catch (error) {
+      console.error('Error fetching students:', error);
+      res.status(500).send('Error fetching students');
+    }
+  });
 
-// Route to get a student's profile
-router.get('/:id', async (req, res) => {
+  // Route to display add student form
+  router.get('/add', (req, res) => {
+    res.render('add_student', { title: 'Add Student' });
+  });
+
+  // Route to get a student's profile
+  router.get('/:id', async (req, res) => {
+    const studentId = req.params.id;
+    try {
+      const student = await db.getStudentById(studentId); // Fetch student from the database
+      if (!student) {
+        return res.redirect('/students/add'); // Redirect to add student page if student data is not available
+      }
+      res.render('student_profile', { student });
+    } catch (error) {
+      console.error('Error retrieving student data:', error);
+      res.status(500).send('Error retrieving student data');
+    }
+  });
+
+  // Route to handle add student form submission with file upload
+  router.post('/add', upload.single('photo'), async (req, res) => {
+    try {
+      const photoUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
+      // Add new student to the database
+      await db.addStudent({
+        name: req.body.name,
+        level: req.body.level,
+        email: req.body.email,
+        occupation: req.body.occupation,
+        phone_number: req.body.phone_number,
+        address_line1: req.body.address_line1,
+        address_line2: req.body.address_line2,
+        postal_code: req.body.postal_code,
+        photo_url: photoUrl
+      });
+      res.redirect('/students');
+    } catch (error) {
+      console.error('Error adding student:', error);
+      res.status(500).send('Error adding student');
+    }
+  });
+
+  // Route to display edit form
+  router.get('/:id/edit', async (req, res) => {
+    const studentId = req.params.id;
+    try {
+      const student = await db.getStudentById(studentId); // Fetch student from the database
+      if (!student) {
+        return res.redirect('/students/add'); // Redirect to add student page if student data is not available
+      }
+      res.render('edit_student', { title: 'Edit Student Profile', student });
+    } catch (error) {
+      console.error('Error retrieving student data:', error);
+      res.status(500).send('Error retrieving student data');
+    }
+  });
+
+  // Route to handle edit form submission with file upload
+  router.post('/:id/edit', upload.single('photo'), async (req, res) => {
+    const studentId = req.params.id;
+    try {
+      const photoUrl = req.file ? `/uploads/${req.file.filename}` : req.body.photo_url;
+
+      // Update student data in the database
+      await db.updateStudent(studentId, {
+        name: req.body.name,
+        level: req.body.level,
+        email: req.body.email,
+        occupation: req.body.occupation,
+        phone_number: req.body.phone_number,
+        address_line1: req.body.address_line1,
+        address_line2: req.body.address_line2,
+        postal_code: req.body.postal_code,
+        photo_url: photoUrl
+      });
+      res.redirect(`/students/${studentId}`);
+    } catch (error) {
+      console.error('Error updating student data:', error);
+      res.status(500).send('Error updating student data');
+    }
+  });
+
+  //Route to handle delete  student profile
+
+  router.post('/:id/delete', async (req, res) => {
   const studentId = req.params.id;
   try {
-    const student = await db.getStudentById(studentId); // Fetch student from the database
-    res.render('student_profile', { student });
+  await db.deleteStudent(studentId);
+  res.redirect('/students');
   } catch (error) {
-    console.error('Error retrieving student data:', error);
-    res.status(500).send('Error retrieving student data');
+  console.error('Error deleting student:', error);
+  res.status(500).send('Error deleting student');
   }
-});
+  });
 
-// Route to update a student's profile
-router.post('/:id', async (req, res) => {
-  const studentId = req.params.id;
-  const updatedData = req.body;
-  try {
-    await db.updateStudentById(studentId, updatedData); // Update student in the database
-    res.redirect(`/students/${studentId}`);
-  } catch (error) {
-    console.error('Error updating student data:', error);
-    res.status(500).send('Error updating student data');
-  }
-});
-
-// Route to delete a student's profile
-router.post('/:id/delete', async (req, res) => {
-  const studentId = req.params.id;
-  try {
-    await db.deleteStudentById(studentId); // Delete student from the database
-    res.redirect('/students');
-  } catch (error) {
-    console.error('Error deleting student data:', error);
-    res.status(500).send('Error deleting student data');
-  }
-});
-
-module.exports = router;
+  return router;
+};

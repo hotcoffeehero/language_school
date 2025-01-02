@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style_folder/header.css">
+  <link rel="stylesheet" href="/style_folder/edit_student.css">
+  <title>Edit Student Profile</title>
+</head>
+<body>
+  <!------------------------------------------------HEADER-->
+  <%- include('_header') %>
+  <!--------------------------------------------------HEADER-->
+  <h1>Edit Student Profile</h1>
+  <div class="container">
+    <div class="box">
+      <form action="/students/<%= student.id %>/edit" method="POST" enctype="multipart/form-data">
+        <div class="photo">
+          <img src="<%= student.photo_url %>" alt="Profile Photo">
+        </div>
+        <div class="name">
+          <label for="name"><strong>Name: </strong></label>
+          <input type="text" id="name" name="name" value="<%= student.name %>">
+        </div>
+        <div class="level">
+          <label for="level"><strong>Level: </strong></label>
+          <input type="text" id="level" name="level" value="<%= student.level %>">
+        </div>
+        <div class="email">
+          <label for="email"><strong>Email: </strong></label>
+          <input type="email" id="email" name="email" value="<%= student.email %>">
+        </div>
+        <div class="occupation">
+          <label for="occupation"><strong>Occupation: </strong></label>
+          <input type="text" id="occupation" name="occupation" value="<%= student.occupation %>">
+        </div>
+        <div class="phone">
+          <label for="phone_number"><strong>Phone: </strong></label>
+          <input type="text" id="phone_number" name="phone_number" value="<%= student.phone_number %>">
+        </div>
+        <div class="address">
+          <label for="address_line1"><strong>Address Line 1: </strong></label>
+          <input type="text" id="address_line1" name="address_line1" value="<%= student.address_line1 %>">
+          <label for="address_line2"><strong>Address Line 2: </strong></label>
+          <input type="text" id="address_line2" name="address_line2" value="<%= student.address_line2 %>">
+          <label for="postal_code"><strong>Postal Code: </strong></label>
+          <input type="text" id="postal_code" name="postal_code" value="<%= student.postal_code %>">
+        </div>
+        <div class="photo-url">
+          <label for="photo_url"><strong>Photo URL: </strong></label>
+          <input type="text" id="photo_url" name="photo_url" value="<%= student.photo_url %>">
+        </div>
+        <div class="photo-upload">
+          <label for="photo"><strong>Upload New Photo: </strong></label>
+          <input type="file" id="photo" name="photo">
+        </div>
+        <div class="edit-profile">
+          <button type="submit">Save Changes</button>
+          <form action="/students/<%= student.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this profile?');">
+            <button type="submit" class="delete-button">Delete Profile</button>
+          </form>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
