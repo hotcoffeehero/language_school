@@ -13,9 +13,13 @@
   <%- include('_header') %>
   <!--------------------------------------------------HEADER-->
   <h1>Student Profile</h1>
+
   <div class="container">
+
     <div class="box">
+
       <% if (student) { %>
+
         <div class="photo">
           <% if (student.photo_url) { %>
             <img src="<%= student.photo_url %>" alt="Profile Photo">
@@ -23,34 +27,48 @@
             <img src="/path/to/placeholder-image.jpg" alt="No Profile Photo Available">
           <% } %>
         </div>
-        <div class="name">
-          <strong>Name: </strong><%= student.name %>
+
+        <div class="profile-details">
+          <div class="name">
+            <strong>Name: </strong><%= student.name %>
+          </div>
+
+          <div class="level">
+            <strong>Level: </strong><%= student.level %>
+          </div>
+
+          <div class="email">
+            <strong>Email: </strong><%= student.email %>
+          </div>
+
+          <div class="occupation">
+            <strong>Occupation: </strong><%= student.occupation %>
+          </div>
+
+          <div class="phone">
+            <strong>Phone: </strong><%= student.phone_number %>
+          </div>
+
+          <div class="address">
+            <strong>Address:</strong>
+            <div class="address-line1"><%= student.address_line1 %></div>
+            <div class="address-line2"><%= student.address_line2 %></div>
+            <div class="postal-code"><%= student.postal_code %></div>
+          </div>
         </div>
-        <div class="level">
-          <strong>Level: </strong><%= student.level %>
-        </div>
-        <div class="email">
-          <strong>Email: </strong><%= student.email %>
-        </div>
-        <div class="occupation">
-          <strong>Occupation: </strong><%= student.occupation %>
-        </div>
-        <div class="phone">
-          <strong>Phone: </strong><%= student.phone_number %>
-        </div>
-        <div class="address">
-          <strong>Address:</strong>
-          <div class="address-line1"><%= student.address_line1 %></div>
-          <div class="address-line2"><%= student.address_line2 %></div>
-          <div class="postal-code"><%= student.postal_code %></div>
-        </div>
+
         <div class="edit-profile">
           <a href="/students/<%= student.id %>/edit"><button type="button">Edit Profile</button></a>
+          <a href="/students"><button type="button">Back to Students</button></a>
         </div>
+        
       <% } else { %>
         <p>Student data not available.</p>
       <% } %>
-    </div>
-  </div>
+
+
+    </div> <!--box div-->
+  </div> <!-- containter div-->
+
 </body>
 </html>

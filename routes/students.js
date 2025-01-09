@@ -27,10 +27,10 @@ module.exports = (upload) => {
       if (!student) {
         return res.redirect('/students/add'); // Redirect to add student page if student data is not available
       }
-      res.render('student_profile', { student });
+      res.render('student_profile', { title: 'Student Profile', student });
     } catch (error) {
-      console.error('Error retrieving student data:', error);
-      res.status(500).send('Error retrieving student data');
+      console.error('Error fetching student:', error);
+      res.status(500).send('Error fetching student');
     }
   });
 
@@ -98,17 +98,16 @@ module.exports = (upload) => {
     }
   });
 
-  //Route to handle delete  student profile
-
+  // Route to delete a student
   router.post('/:id/delete', async (req, res) => {
-  const studentId = req.params.id;
-  try {
-  await db.deleteStudent(studentId);
-  res.redirect('/students');
-  } catch (error) {
-  console.error('Error deleting student:', error);
-  res.status(500).send('Error deleting student');
-  }
+    const studentId = req.params.id;
+    try {
+      await db.deleteStudent(studentId); // Delete student from the database
+      res.redirect('/students?deleted=true'); // Redirect with query parameter for notification
+    } catch (error) {
+      console.error('Error deleting student:', error);
+      res.status(500).send('Error deleting student');
+    }
   });
 
   return router;

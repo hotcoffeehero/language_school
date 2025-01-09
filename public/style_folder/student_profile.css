@@ -89,3 +89,20 @@ h1 {
   background-color: var(--hover); /* Gentle Green */
   color: var(--primary); /* Dark Gray */
 }
+
+.delete-button {
+  background-color: var(--primary); /* Dark Gray */
+  color: var(--accent); /* Very Light Gray */
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button:hover {
+  background-color: var(--hover); /* Gentle Green */
+  color: var(--primary); /* Dark Gray */
+}

@@ -4,6 +4,7 @@
   --secondary: #b0b0b0; /* Light Gray */
   --accent: #d9d9d9; /* Very Light Gray */
   --hover: #a8d5ba; /* Gentle Green */
+  --caution: #f5a9a9; /* Light Red */
 }
 
 /* General body styling */
@@ -70,13 +71,13 @@ form input[type="file"] {
   margin-bottom: 20px;
 }
 
-.edit-profile {
+.buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-.edit-profile button {
+.save-changes-button {
   background-color: var(--primary); /* Dark Gray */
   color: var(--accent); /* Very Light Gray */
   border: none;
@@ -88,10 +89,11 @@ form input[type="file"] {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.edit-profile button:hover {
+.save-changes-button:hover {
   background-color: var(--hover); /* Gentle Green */
   color: var(--primary); /* Dark Gray */
 }
+
 
 .delete-button {
   background-color: var(--primary); /* Dark Gray */
@@ -106,6 +108,19 @@ form input[type="file"] {
 }
 
 .delete-button:hover {
-  background-color: var(--hover); /* Gentle Green */
+  background-color: var(--caution); /* Light Red */
   color: var(--primary); /* Dark Gray */
+}
+
+/* Notification styling */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--primary); /* Dark Gray */
+  color: var(--accent); /* Very Light Gray */
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
