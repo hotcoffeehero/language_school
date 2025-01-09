@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const multer = require('multer');
 const studentsRouter = require('./routes/students');
+const schedulesRouter = require('./routes/schedules'); // Add this line
 
 const app = express();
 
@@ -29,6 +30,7 @@ const upload = multer({ storage });
 
 // Use the students router
 app.use('/students', studentsRouter(upload));
+app.use('/schedules', schedulesRouter); // Add this line
 
 // Route to render the homepage => index.ejs.
 app.get('/', (req, res) => {

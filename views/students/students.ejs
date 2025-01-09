@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style_folder/header.css">
+  <link rel="stylesheet" href="/style_folder/students.css">
+  <title><%= title %></title>
+</head>
+<body>
+  <!------------------------------------------------HEADER-->
+  <%- include('../_header') %>
+  <!--------------------------------------------------HEADER-->
+  <h1>Students</h1>
+  <div class="container">
+    <div class="box">
+      <% if (students && students.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Level</th>
+              <th>Phone Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% students.forEach(student => { %>
+              <tr>
+                <td><a href="/students/<%= student.id %>"><%= student.id %></a></td>
+                <td><%= student.name %></td>
+                <td><%= student.level %></td>
+                <td><%= student.phone_number %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>No students found.</p>
+      <% } %>
+    </div>
+  </div>
+  <div class="add-student">
+    <a href="/students/add"><button>Add Student</button></a>
+  </div>
+</body>
+</html>
