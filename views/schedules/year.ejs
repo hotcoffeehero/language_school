@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style_folder/header.css">
+  <link rel="stylesheet" href="/style_folder/schedules/year.css">
+  <link rel="stylesheet" href="/node_modules/@fullcalendar/core/main.min.css">
+  <link rel="stylesheet" href="/node_modules/@fullcalendar/daygrid/main.min.css">
+  <script src="/node_modules/@fullcalendar/core/main.min.js"></script>
+  <script src="/node_modules/@fullcalendar/daygrid/main.min.js"></script>
+  <title><%= title %></title>
+</head>
+<body>
+  <%- include('../_header') %>
+  <h1>Schedules for <%= year %></h1>
+  <div id="calendar"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: [ 'dayGrid' ],
+        initialView: 'dayGridMonth',
+        initialDate: '<%= year %>-01-01',
+        events: [
+          // Add your events here
+          {
+            title: 'Event 1',
+            start: '<%= year %>-01-01'
+          },
+          {
+            title: 'Event 2',
+            start: '<%= year %>-02-05',
+            end: '<%= year %>-02-07'
+          }
+        ]
+      });
+      calendar.render();
+    });
+  </script>
+</body>
+</html>
