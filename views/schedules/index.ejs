@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style_folder/header.css">
-  <link rel="stylesheet" href="/style_folder/schedules/schedule_index.css">
-  <link rel="stylesheet" href="/node_modules/@fullcalendar/core/main.min.css">
-  <link rel="stylesheet" href="/node_modules/@fullcalendar/daygrid/main.min.css">
-  <script src="/node_modules/@fullcalendar/core/main.min.js"></script>
-  <script src="/node_modules/@fullcalendar/daygrid/main.min.js"></script>
-  <title><%= title %></title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style_folder/header.css">
+    <link rel="stylesheet" href="/style_folder/schedules/main.min.css">
+    <link rel="stylesheet" href="/style_folder/schedules/index.css">
+    <script src="/style_folder/schedules/main.min.js"></script>
+    <title><%= title %></title>
+  </head>
 <body>
   <%- include('../_header') %>
   <h1>Schedules</h1>
   <div id="calendar"></div>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: [ 'dayGrid' ],
-        initialView: 'dayGridMonth',
-        events: [
-          // Add your events here
-          {
-            title: 'Event 1',
-            start: '2023-10-01'
-          },
-          {
-            title: 'Event 2',
-            start: '2023-10-05',
-            end: '2023-10-07'
-          }
-        ]
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          initialDate: '2025-01-01',
+          dateClick: function(info) {
+          // This gives me a view of the individual day.
+          window.location.href = '/schedules/day/' + info.dateStr;
+        }
+        });
+        calendar.render();
       });
-      calendar.render();
-    });
   </script>
 </body>
 </html>

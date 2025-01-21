@@ -12,3 +12,7 @@ CREATE TABLE students (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+To import the style and scripts for FullCalendar:
+
+curl -O https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css
+curl -O https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js

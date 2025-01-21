@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// ROUTERS
+// Use the students router
 app.use('/students', studentsRouter(upload));
 app.use('/schedules', schedulesRouter); 
 
