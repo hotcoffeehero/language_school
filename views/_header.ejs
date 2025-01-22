@@ -1,11 +1,12 @@
 <header>
-    <div class="logo">
-      <a href="/">エスデス (SDES)</a>
-    </div>
-    <nav class="nav-links">
-      <a href="/students">Students</a>
-      <a href="/instructors">Instructors</a>
-      <a href="/schedules">Schedules</a>
-      <a href="/settlement">Settlement</a>
-    </nav>
+  <div class="logo">
+    <a href="/">エスデス (SDES)</a>
+  </div>
+  <nav class="nav-links">
+    <a href="/" class="<%= (page === 'home') ? 'active' : '' %>">Home</a>
+    <a href="/students" class="<%= (page === 'students') ? 'active' : '' %>">Students</a>
+    <a href="/instructors" class="<%= (page === 'instructors') ? 'active' : '' %>">Instructors</a>
+    <a href="/schedules" class="<%= (page === 'schedules') ? 'active' : '' %>">Schedules</a>
+    <a href="/settlement" class="<%= (page === 'settlement') ? 'active' : '' %>">Settlement</a>
+  </nav>
 </header>

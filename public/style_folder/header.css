@@ -36,3 +36,34 @@ header .nav-links a:hover {
   color: var(--hover); /* Gentle Green */
   text-decoration: underline;
 }
+
+/* Example styles for the header */
+.header {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff;
+  background-color: orange;
+  border-radius: 5px;
+}

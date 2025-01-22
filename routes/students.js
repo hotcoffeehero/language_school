@@ -7,7 +7,7 @@ module.exports = (upload) => {
   router.get('/', async (req, res) => {
     try {
       const students = await db.getStudents(); // Fetch all students from the database
-      res.render('students/students', { title: 'Students', students });
+      res.render('students/index', { title: 'Students', page: 'students', students });
     } catch (error) {
       console.error('Error fetching students:', error);
       res.status(500).send('Error fetching students');

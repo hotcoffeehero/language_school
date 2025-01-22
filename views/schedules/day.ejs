@@ -11,17 +11,47 @@
 </head>
 <body>
   <%- include('../_header') %>
-  <h1>Schedule for <%= date %></h1>
-  <div id="calendar"></div>
+  <div class="header-container">
+    <a href="/schedules" class="back-button">&laquo; Back</a>
+    <h1 id="schedule-date"></h1>
+  </div>
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <% for (let i = 1; i <= 5; i++) { %>
+            <th>Instructor <%= i %></th>
+          <% } %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let hour = 9; hour <= 21; hour++) { %>
+          <tr>
+            <td><%= hour %>:00</td>
+            <% for (let i = 1; i <= 5; i++) { %>
+              <td>Class info</td>
+            <% } %>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Format the date
+      var date = new Date('<%= date %>');
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      var formattedDate = date.toLocaleDateString('en-US', options);
+      document.getElementById('schedule-date').innerText = formattedDate;
+
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: [ 'timeGrid' ],
         initialView: 'timeGridDay',
         initialDate: '<%= date %>',
-        slotMinTime: '06:00:00',
-        slotMaxTime: '23:00:00',
+        slotMinTime: '09:00:00',
+        slotMaxTime: '21:00:00',
         events: [
           // Add your events here for the specific day
         ]

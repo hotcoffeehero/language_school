@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const multer = require('multer');
 const studentsRouter = require('./routes/students');
-const schedulesRouter = require('./routes/schedules'); 
+const schedulesRouter = require('./routes/schedules');
+const instructorsRouter = require('./routes/instructors'); // Add this line
 
 const app = express();
 
@@ -30,11 +31,12 @@ const upload = multer({ storage });
 
 // Use the students router
 app.use('/students', studentsRouter(upload));
-app.use('/schedules', schedulesRouter); 
+app.use('/schedules', schedulesRouter);
+app.use('/instructors', instructorsRouter); // Add this line
 
 // Route to render the homepage => index.ejs.
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home', message: 'Welcome to the Language School Management System' });
+  res.render('index', { title: 'Home', message: 'Welcome to the Language School Management System', page: 'home' });
 });
 
 // Start the server

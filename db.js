@@ -97,5 +97,15 @@ module.exports = {
         resolve(results);
       });
     });
+  },
+  getAllInstructors: () => {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM instructors', (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(results);
+      });
+    });
   }
 };
