@@ -1,3 +1,8 @@
+/* Force the scrollbar to always be present */
+html {
+  overflow-y: scroll;
+}
+
 /* Color Palette */
 :root {
   --primary: #4a4a4a; /* Dark Gray */
@@ -6,51 +11,35 @@
   --hover: #a8d5ba; /* Gentle Green */
 }
 
-/* Header styling */
-header {
-  background-color: var(--primary); /* Dark Gray */
-  color: var(--accent); /* Very Light Gray */
-  padding: 20px;
-  text-align: center;
-}
-
-header .logo a {
-  color: var(--accent); /* Very Light Gray */
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-header .nav-links {
-  margin-top: 10px;
-}
-
-header .nav-links a {
-  color: var(--accent); /* Very Light Gray */
-  text-decoration: none;
-  margin: 0 15px;
-  font-size: 1rem;
-}
-
-header .nav-links a:hover {
-  color: var(--hover); /* Gentle Green */
-  text-decoration: underline;
-}
-
-/* Example styles for the header */
 .header {
   background-color: #f8f9fa;
   padding: 10px;
   text-align: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .logo a {
   font-size: 1.5rem;
   color: #333;
   text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-links a {
@@ -64,6 +53,6 @@ header .nav-links a:hover {
 .nav-links a:hover,
 .nav-links a.active {
   color: #fff;
-  background-color: orange;
+  background-color: #a8d5ba; /* Change to the gentle green color */
   border-radius: 5px;
 }

@@ -1,3 +1,48 @@
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: var(--primary);
+}
+
+/* Main content styling */
+h1 {
+  color: var(--primary); /* Dark Gray */
+  text-align: center;
+  margin-top: 50px;
+  font-size: 2rem;
+}
+
+/* Container styling */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 10px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+table td {
+  background-color: #fff;
+}
+
 #calendar {
   max-width: 900px;
   margin: 40px auto;

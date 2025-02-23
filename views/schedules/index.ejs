@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="/style_folder/header.css">
     <link rel="stylesheet" href="/style_folder/schedules/main.min.css">
     <link rel="stylesheet" href="/style_folder/schedules/index.css">
-    <script src="/style_folder/schedules/main.min.js"></script>
     <title><%= title %></title>
   </head>
 <body>
-  <%- include('../_header') %>
+  <%- include('../_header', { page: 'schedules' }) %>
   <div id="calendar"></div>
+  <script src="/style_folder/schedules/main.min.js"></script>
   <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');

@@ -9,7 +9,6 @@
 /* General body styling */
 body {
   font-family: Arial, sans-serif;
-  background-color: var(--accent); /* Very Light Gray */
   margin: 0;
   padding: 0;
 }

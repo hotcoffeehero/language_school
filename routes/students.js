@@ -16,7 +16,7 @@ module.exports = (upload) => {
 
   // Route to display add student form
   router.get('/add', (req, res) => {
-    res.render('students/add_student', { title: 'Add Student' });
+    res.render('students/add_student', { title: 'Add Student', page: 'students' });
   });
 
   // Route to get a student's profile
@@ -27,7 +27,7 @@ module.exports = (upload) => {
       if (!student) {
         return res.redirect('/students/add'); // Redirect to add student page if student data is not available
       }
-      res.render('students/student_profile', { title: 'Student Profile', student });
+      res.render('students/student_profile', { title: 'Student Profile', page: 'students', student });
     } catch (error) {
       console.error('Error fetching student:', error);
       res.status(500).send('Error fetching student');
@@ -66,7 +66,7 @@ module.exports = (upload) => {
       if (!student) {
         return res.redirect('/students/add'); // Redirect to add student page if student data is not available
       }
-      res.render('students/edit_student', { title: 'Edit Student Profile', student });
+      res.render('students/edit_student', { title: 'Edit Student Profile', page: 'students', student });
     } catch (error) {
       console.error('Error retrieving student data:', error);
       res.status(500).send('Error retrieving student data');
